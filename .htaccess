@@ -1,0 +1,139 @@
+# ----------------------------------------------------------------------
+# Set Expires headers (for better cache control).
+# ----------------------------------------------------------------------
+
+# Usage:
+# Expires headers tell the browser whether they should request a specific file from the server or whether they 
+# should grab it from the browser's cache.
+# It not only reduces the load of downloads from the server but rather to reduce the number of HTTP requests for 
+# the server.
+# It tells the browser how long to store a file in the cache. Using Expires Headers helps increase load times for 
+# returning visitors.
+
+ExpiresActive On
+ExpiresDefault "access plus 1 year"
+ExpiresByType text/html "access plus 1 second"
+ExpiresByType image/gif "access plus 2592000 seconds"
+ExpiresByType image/jpeg "access plus 2592000 seconds"
+ExpiresByType image/png "access plus 2592000 seconds"
+ExpiresByType image/x-icon "access plus 2592000 seconds"
+ExpiresByType text/css "access plus 604800 seconds"
+ExpiresByType text/javascript "access plus 604800 seconds"
+ExpiresByType application/x-javascript "access plus 604800 seconds"
+
+AddOutputFilterByType DEFLATE text/html text/plain text/xml
+
+<ifmodule mod_expires.c>
+<FilesMatch "\.(ico|jpg|jpeg|png|gif|js|css|swf)$">
+ExpiresDefault "access plus 2 hours"
+</FilesMatch>
+
+<FilesMatch "\.(pl|php|cgi|spl|scgi|fcgi)$">
+    ExpiresActive Off
+</FilesMatch>
+</ifmodule>
+
+# ----------------------------------------------------------------------
+# Address security.
+# ----------------------------------------------------------------------
+
+# Block access to "hidden" directories whose names begin with a period.
+<IfModule mod_rewrite.c>
+  RewriteRule "(^|/)\." - [F]
+</IfModule>
+
+# Have Apache block users from browsing folders without a default document.
+Options All -Indexes
+
+# ----------------------------------------------------------------------
+# Better website exprerience for IE users.
+# ----------------------------------------------------------------------
+
+# Usage: 
+# Allows web authors to choose what version of Internet Explorer the page should be rendered as.
+# Makes the IE the site is viewed on to use the latest, most modern layout engine that it has.
+# We also add chrome=1 so if Chrome Frame is installed, that site will take advantage of that and render the 
+# site like it is rendering on Chrome.
+
+<IfModule mod_headers.c>
+    Header set X-UA-Compatible "IE=Edge,chrome=1"
+    <FilesMatch "\.(js|css|gif|png|jpe?g|pdf|xml|oga|ogg|m4a|ogv|mp4|m4v|webm|svg|svgz|eot|ttf|otf|woff|ico|webp|appcache|manifest|htc|crx|xpi|safariextz|vcf)$" >
+      Header unset X-UA-Compatible
+    </FilesMatch>
+</IfModule>
+
+# ----------------------------------------------------------------------
+# Concatenation from within specific JS and CSS files.
+# ----------------------------------------------------------------------
+
+# Usage:
+# To combine your JavaScript & CSS includes into one file to speed up the loading of your web pages.
+
+# FOR JAVASCRIPT
+<FilesMatch "\.combined\.js$">
+  Options +Includes
+  AddOutputFilterByType INCLUDES application/javascript application/json
+  SetOutputFilter INCLUDES
+</FilesMatch>
+
+# FOR CSS
+<FilesMatch "\.combined\.css$">
+  Options +Includes
+  AddOutputFilterByType INCLUDES text/css
+  SetOutputFilter INCLUDES
+</FilesMatch>
+
+# ----------------------------------------------------------------------
+# Compressing file output with Gzip.
+# ----------------------------------------------------------------------
+
+# Usage:
+# Reduce the size of files sent from your server to increase the speed with which they are transferred to the browser.
+# Gzip compresses your webpages and style sheets before sending them over to the browser.
+
+<IfModule mod_gzip.c>
+mod_gzip_on         Yes
+mod_gzip_dechunk    Yes
+mod_gzip_item_include file      \.(html?|txt|css|js|php|pl)$
+mod_gzip_item_include handler   ^cgi-script$
+mod_gzip_item_include mime      ^text\.*
+mod_gzip_item_include mime      ^application/x-javascript.*
+mod_gzip_item_exclude mime      ^image\.*
+mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
+</IfModule>
+
+<IfModule mod_gzip.c>
+mod_gzip_on   Yes
+mod_gzip_dechunk Yes
+mod_gzip_item_include file   \.(html?|txt|css|js|php|pl)$
+mod_gzip_item_include handler  ^cgi-script$
+mod_gzip_item_include mime  ^text\.*
+mod_gzip_item_include mime  ^application/x-javascript.*
+mod_gzip_item_exclude mime  ^image\.*
+mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
+</IfModule>
+
+# ----------------------------------------------------------------------
+# Improve YSlow score with ETags.
+# ----------------------------------------------------------------------
+
+# Usage:
+# Entity tags (ETags) are a mechanism that web servers and browsers use to determine whether the component 
+# in the browser's cache matches the one on the origin server. 
+# It is one of several mechanisms that HTTP provides for cache validation.
+# An ETag is an opaque identifier assigned by a web server to a specific version of a resource found at a URL.
+# If the resource content at that URL ever changes a new and different ETag is assigned.
+
+<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)(\.gz)?$">
+Header unset ETag
+FileETag None
+</FilesMatch>
+
+# ----------------------------------------------------------------------
+# 404 error page.
+# ----------------------------------------------------------------------
+
+# Usage:
+# Present users with a custom error page (that will ideally direct them back to the Homepage).
+
+ErrorDocument 404 /error/404page.html
