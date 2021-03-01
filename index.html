@@ -11,7 +11,7 @@
     <meta
       name="description"
       lang="en"
-      content="Notes is a notetaking app developed by apple. it is provided on their ios and macos operating systems, the latter starting with os X 10.8 mountain lion. it functions as a service for making short text notes, which can be synchronised between devices using apple's icloud service."
+      content="In this website you can store your items and quantity into local storage and access it later when required."
     />
 
     <!-- Keywords to help with SEO go here. Note: Usage of lang tag.  -->
@@ -38,7 +38,7 @@
     <link rel="stylesheet" media="screen" href="assets/css/style.css" />
 
     <!-- Font Awesome css. -->
-    <link rel="stylesheet" href="assets/css/all.css" />
+    <!-- <link rel="stylesheet" href="assets/css/all.css" /> -->
   </head>
 
   <body>
@@ -46,11 +46,11 @@
       <!-- Header section starts here. -->
       <header>
         <div class="wrapper">
-          <span class="clear_all" title="Clear all">r</span>
+          <span class="clear_all clickable_btn" title="Clear all">r</span>
           <form action="#FIXME" method="GET">
             <input type="text" class="input_items" placeholder="Item name" name="item_name" />
             <input type="text" class="input_items" placeholder="Quantity" name="quantity" />
-            <button title="save" id="save">save</button>
+            <button title="save" class="clickable_btn">save</button>
           </form>
         </div>
       </header>
@@ -68,54 +68,8 @@
 
         <!-- Item lists section starts here. -->
         <section class="item_list">
-          <div class="wrapper">
-            <div class="each_item">
-              <span class="quantity">11 quantity</span>
-              <div class="item_details">
-                <h3>item name</h3>
-                <span>updated august 28, 2021</span>
-                <ul>
-                  <li>update</li>
-                  <li>remove</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="each_item">
-              <span class="quantity">11 quantity</span>
-              <div class="item_details">
-                <h3>item name</h3>
-                <span>updated august 28, 2021</span>
-                <ul>
-                  <li>update</li>
-                  <li>remove</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="each_item">
-              <span class="quantity">11 quantity</span>
-              <div class="item_details">
-                <h3>item name</h3>
-                <span>updated august 28, 2021</span>
-                <ul>
-                  <li>update</li>
-                  <li>remove</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="each_item">
-              <span class="quantity">11 quantity</span>
-              <div class="item_details">
-                <h3>item name</h3>
-                <span>updated august 28, 2021</span>
-                <ul>
-                  <li>update</li>
-                  <li>remove</li>
-                </ul>
-              </div>
-            </div>
+          <div id="result_list_div" class="wrapper">
+            
           </div>
         </section>
         <!-- Item lists section ends here. -->

@@ -289,6 +289,10 @@ header form button:hover {
 /* Title section ends here. */
 /* Item lists section starts here. */
 
+.item_list{
+  padding-bottom: 30px;
+}
+
 .item_list .wrapper {
   display: grid;
   color: #4f4f4f;
@@ -314,6 +318,13 @@ header form button:hover {
   font-weight: 600;
   padding: 4px 20px 5px 9px;
   cursor: alias;
+}
+
+.quantity::after{
+  content: " QUANTITY";
+  color: #4f4f4f;
+  font-size: 10px;
+  font-weight: 600;
 }
 
 .each_item {
@@ -368,6 +379,21 @@ header form button:hover {
 .each_item ul li:nth-child(2):hover {
   background-color: rgb(230, 81, 81);
   transition: 0.5s;
+}
+
+.each_item .item_details ul .update{
+  box-shadow: inset 1px 1px 10px rgb(107, 246, 51);
+}
+
+.update_element{
+  border-bottom: 1px solid rgb(107, 246, 51);
+}
+
+.update_element::after{
+  content: attr(data-after-content) " <- Click to edit.";
+  color: #4f4f4f;
+  font-size: 10px;
+  font-weight: 800;
 }
 
 /* Item lists section starts here. */
