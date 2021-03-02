@@ -1,5 +1,8 @@
 var result_list_div = document.getElementById('result_list_div'); // Store result div element first because we have to display data that already in local storage.
 
+var err_msg_list = document.createElement('P'); // Create element to display error massage.
+err_msg_list.textContent = "No items stored in storage. To store item please first save item.";
+err_msg_list.classList.add('err_msg_list');
 // var l_storage = window.localStorage;
 // var storage_keys = Object.keys(localStorage);
 // var keyname;
@@ -12,7 +15,9 @@ var result_list_div = document.getElementById('result_list_div'); // Store resul
 var entiredataobj = {
   keyname: null,
   keynamearr: [], // Here we store all keys for later use of function call.
+  validate_input_status: 0, // If input successfully validated then variable is set to 1 and if item is already added into list then it set to 2 or otherwise 0.
   clickable_btn: document.querySelectorAll('.clickable_btn'), // Here we store all clickable buttons and update it everytime with updateclickable_btn fucntion.
+  input_items: document.querySelectorAll('.input_items'), // Here we store input_items enter by user.
   updatekeynamearr: function () {
     // This function resets keynamearr with all local storage new values.
     this.keynamearr = [];
@@ -20,31 +25,33 @@ var entiredataobj = {
     for (this.keyname of storage_keys) {
       this.keynamearr.push(this.keyname);
     }
-    console.log(this.keynamearr)
   },
   callsave: function (save_items) {
     // This saves an user input in local storage as well as show all new element on page.
     saveitems(save_items);
+    this.validate_input_status = 0;
     this.callshowsave();
   },
   callshowsave: function () {
     // This function display data that was stored in local storage.
     this.updatekeynamearr();
     this.clearpagelistarea();
-    for (this.keyname of this.keynamearr) {
-      show_save_items(this.keyname);
+
+    if (this.keynamearr.length === 0) {
+      showerror();
+    } else {
+      for (this.keyname of this.keynamearr) {
+        show_save_items(this.keyname);
+      }
     }
     this.updateclickable_btn();
     this.updateclickaction_onbtn();
+    this.upadteinputfields();
+    this.updateinputfieldsclick_action();
   },
   clearpagelistarea: function () {
     // This function clears the page list div for new items to show.
     result_list_div.textContent = '';
-  },
-  refreshentirelist: function (keynamearr) {
-    for (this.keyname of keynamearr) {
-      show_save_items(this.keyname);
-    }
   },
   updateclickable_btn: function () {
     // Store all clickable buttons.
@@ -53,18 +60,59 @@ var entiredataobj = {
   updateclickaction_onbtn: function () {
     // Set functions on updated clickable buttons everytime it updates.
     entiredataobj.clickable_btn.forEach(function (item, index) {
-      console.log(item);
       item.addEventListener('click', click_action); // Set function click_action on all buttons.
     });
   },
+  upadteinputfields: function () {
+    this.input_items = document.querySelectorAll('.input_items'); // This function update input items every time it called.
+  },
+  updateinputfieldsclick_action: function () {
+    this.input_items.forEach(function (item, index) {
+      item.addEventListener('keyup', validate_input_items); // This function validates input fields.
+    });
+  }
 };
 
 entiredataobj.callshowsave();
 
-// entiredataobj.getallkeys(storage_keys); Display old keys when page open for first time.
-// console.log(entiredataobj.objkeyname, entiredataobj.objkeynamearr);
+var input_error_msg = document.getElementById('input_error_msg'); // Store error massage p tag to show error.
 
-var input_items = document.querySelectorAll('.input_items'); // Store input items.
+
+function validate_input_items(e) {
+  entiredataobj.validate_input_status = 0;
+
+  // input_items = document.querySelectorAll('.input_items');
+  var item_name = entiredataobj.input_items[0];
+  var item_quantity = entiredataobj.input_items[1];
+
+  for (var key of entiredataobj.keynamearr) {
+    var check_storage = JSON.parse(localStorage.getItem(key));
+    if (check_storage[0].toLowerCase() === item_name.value.toLowerCase()) {
+      console.log("match found")
+      console.log(check_storage[0], item_name.value)
+      entiredataobj.validate_input_status = 2;
+    }
+  }
+
+  var regexforitem_name = /^[a-zA-Z ]*$/;
+  var regexforitem_quantity = /[\D]+/g;
+  if (!(regexforitem_name.test(item_name.value))) {
+    input_error_msg.textContent = "Item name can not include numbers or any spcial characters!"
+  } else if (regexforitem_quantity.test(item_quantity.value)) {
+    console.log(regexforitem_quantity.exec(item_quantity.value))
+    input_error_msg.textContent = "Quantity cannot contain any characters or blank spaces!"
+  } else if (item_name.value.length < 3 || item_name.value.length > 15) {
+    input_error_msg.textContent = "Item name must be 2 to 15 characters long!";
+  } else if (item_quantity.value.length < 1 || item_quantity.value.length > 3) {
+    input_error_msg.textContent = "Quantity must be 1 to 3 digits!"
+  } else if (entiredataobj.validate_input_status == 2) {
+    input_error_msg.textContent = "Item was already added into list.";
+  } else {
+    input_error_msg.textContent = "Everything is ok. You can add item.";
+    entiredataobj.validate_input_status = 1;
+  }
+}
+
 var key; // Store local storage key for later use.
 var date; // Store date of storage creation.
 var monthnames = [
@@ -85,7 +133,6 @@ var monthnames = [
 
 function click_action(e) {
   var click_element = e.target;
-  console.log(click_element);
   var click_name = e.target.textContent; // Identify button.
 
   var stored_name = click_element.parentNode.parentNode.firstElementChild;
@@ -96,23 +143,35 @@ function click_action(e) {
   );
 
   switch (
-    click_name // Depends upon button perform actions.
+  click_name // Depends upon button perform actions.
   ) {
     case 'save':
       e.preventDefault();
-      date = new Date();
-      var save_items = [
-        input_items[0].value,
-        input_items[1].value,
-        monthnames[date.getMonth()],
-        date.getDate(),
-        date.getFullYear(),
-      ];
-      // saveitems(save_items);
-      entiredataobj.callsave(save_items);
-      // entiredataobj.updatekeynamearr();
-      // entiredataobj.refreshentirelist(entiredataobj.keynamearr);
-
+      console.log(entiredataobj.input_items[0].value, entiredataobj.input_items[1].value)
+      if (entiredataobj.input_items[0].value.length == 0) {
+        input_error_msg.textContent = "Item name can not be empty!";
+        return false;
+      } else if (entiredataobj.input_items[1].value.length == 0) {
+        input_error_msg.textContent = "Quantity can not be empty!";
+        return false;
+      } else if (entiredataobj.validate_input_status === 2) {
+        input_error_msg.textContent = "Item was already added into the list."
+        return false;
+      } else if (entiredataobj.validate_input_status === 0) {
+        input_error_msg.textContent = "Please solve all errors!"
+      } else {
+        date = new Date();
+        var save_items = [
+          entiredataobj.input_items[0].value,
+          entiredataobj.input_items[1].value,
+          monthnames[date.getMonth()],
+          date.getDate(),
+          date.getFullYear(),
+        ];
+        entiredataobj.callsave(save_items);
+        entiredataobj.input_items[0].textContent = "";
+        entiredataobj.input_items[1].textContent = "";
+      }
       break;
 
     case 'r':
@@ -170,15 +229,14 @@ function saveitems(save_items) {
       date.getSeconds() +
       date.getMilliseconds();
     localStorage.setItem(key, JSON.stringify(save_items));
-    // for (var i = 0; i <= keynamesarr.length - 1; i++) {
-    //   show_save_items(keynamesarr[i]);
-    // }
+
   } else {
     console.log('Sorry, your browser does not support Web Storage...');
   }
 }
 
 function show_save_items(key_name) {
+
   var stored_items = JSON.parse(localStorage.getItem(key_name));
 
   var stored_item_name = stored_items[0];
@@ -218,4 +276,8 @@ function show_save_items(key_name) {
   item_details.innerHTML = h3.outerHTML + span.outerHTML + ul.outerHTML;
   each_item.innerHTML = quantity.outerHTML + item_details.outerHTML;
   result_list_div.appendChild(each_item);
+}
+
+function showerror() { // This function shows error massage when local storage is empty.
+  result_list_div.appendChild(err_msg_list);
 }

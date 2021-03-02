@@ -252,6 +252,19 @@ header form button:hover {
   transition: 0.5s;
 }
 
+.input_error_msg{
+  text-align: center;
+  color: #f9f403;
+  text-shadow:1px 1px 2px red;
+  font-weight: 600;
+}
+
+.err_msg_list{
+  color: #f9f403;
+  font-weight: 600;
+  text-shadow: 1px 1px 2px red;
+}
+
 /* Header section ends here. */
 /* Main section starts here. */
 
