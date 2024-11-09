@@ -1,74 +1,86 @@
 @charset "utf-8";
 
-/*------------------------------------------------------------------
-  [Table of contents]
-  * To keep an overview of structure of your code, we make use of table of 
-  * content. Table of content is use display the overall tree structure of your
-  * Layout. 
-  * (NOTE: Remove this commented code once you start developing the code.
-  * Remove the following table of content and add your own as this is just and 
-  * example to let you know)
-
-  1. CSS Reset Code
-    1.1. Eric Meyers Reset/HTML5 display-role reset for older browsers
-    1.2. Clear Fix
-    1.3. Font class declaration
-  2. Body
-  3. Header / .header
-    2.1. Navigation / .navbar
-  4. Content / .content
-    4.1. Left column / .leftcolumn
-    4.2. Right column / .rightcolumn
-    4.3. Sidebar / .sidebar
-      4.3.1. RSS / .rss
-      4.3.2. Search / .search
-      4.3.3. Boxes / .box
-      4.3.4. Sideblog / .sideblog
-      4.3.5. Advertisements / .ads
-  5. Footer / .footer
-  ------------------------------------------------------------------*/
-
-/*------------------------------------------------------------------
-  [Color codes]
-  * Mention the color code you have used in your html document for the respective
-  * elements given as follow. 
-  * (NOTE: Remove this commented code once you start developing the code. 
-  * Remove the following color code and add your own as this is just and 
-  * example to let you know)
-
-  Header nav: #e5e5df (Cararra)
-  Header nav a (hover): #fff (white)
-  Header nav a (active): #fff (white)
--------------------------------------------------------------------*/
-
-/*------------------------------------------------------------------
-  [Typography]
-  * Mention the Typography you have used in your html document for the respective
-  * elements given as follow.
-  * (NOTE: Remove this commented code once you start developing the code. 
-  * Remove the following typography and add your own as this is just and 
-  * example to let you know)
-
-  Header nav a: 16px 'Futura Bold', 'Gill Sans', Arial, 'Helvetica Neue', Helvetica, sans-serif;
-  View-register li a : 12px 'Futura Bold', 'Gill Sans', Arial, 'Helvetica Neue', Helvetica, sans-serif;
-  -------------------------------------------------------------------*/
-
-/* ==========================================================================
-   1. CSS Reset Code
-   ========================================================================== */
-
-/* 1.1. Eric Meyers Reset
-   http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
-   ========================================================================== */
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
-blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img,
-ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center,
-dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody,
-tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure,
-figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
   margin: 0;
   padding: 0;
   border: 0;
@@ -78,17 +90,31 @@ time, mark, audio, video {
 }
 
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section, main {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+main {
   display: block;
 }
 
 /* Force scrollbar */
-html { overflow-y: scroll; }
+html {
+  overflow-y: scroll;
+}
 
 /* Align radios and text inputs with their label */
 
-input[type='radio'] { vertical-align: text-bottom; }
+input[type='radio'] {
+  vertical-align: text-bottom;
+}
 
 /* Hand cursor on clickable input elements */
 label,
@@ -104,7 +130,9 @@ strong {
   font-size: inherit;
 }
 
-em { font-style: italic; }
+em {
+  font-style: italic;
+}
 
 img {
   border: 0;
@@ -119,9 +147,13 @@ sup {
   line-height: 0;
 }
 
-sup { top: -.7em; }
+sup {
+  top: -0.7em;
+}
 
-sub { bottom: -.25em; }
+sub {
+  bottom: -0.25em;
+}
 
 /* 1.2. Clear Fix
    ========================================================================== */
@@ -129,27 +161,315 @@ sub { bottom: -.25em; }
 .cf:before,
 .cf:after {
   display: table;
-  content: " ";
+  content: ' ';
 }
 
-.cf:after { clear: both; }
-
-/* 1.3. Font class declaration
-   ========================================================================== */
-/*
- * Mention the font property (eg: font-family, font-size, font-weight, font-style
- * etc) that have been commonly used in the html document. Make a class of it and
- * apply to the element wherever it is needed. If any single property in changed,
- * then override only that property in the particular class which is used for the
- * element.
- * (NOTE: Remove this commented code once you start 
- * developing the code. Remove the following font class and add your own
- * as this is just and example to let you know. If there is only one font family
- * followed throughout the site, then menstion the font property in body. No need
- * of creating an extra class for it) */
+.cf:after {
+  clear: both;
+}
 
 .futura-bold-font {
-  font-family: 'Futura Bold', 'Gill Sans', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Futura Bold', 'Gill Sans', Arial, 'Helvetica Neue', Helvetica,
+    sans-serif;
   font-style: normal;
   font-weight: bold;
 }
+
+/* Stylesheet starts here. */
+
+.container {
+  background: linear-gradient(rgba(94, 128, 142, 0.9), rgba(0, 115, 190, 0.7)),
+    url('../images/background.jpg');
+  min-height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: Helvetica, sans-serif;
+}
+
+.wrapper {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.wrapper ul {
+  list-style: none;
+}
+
+/* Header section starts here. */
+
+header .wrapper {
+  display: flex;
+  align-items: center;
+  padding: 60px 0;
+}
+
+header span {
+  color: transparent;
+  cursor: pointer;
+  display: block;
+}
+
+header span:hover::after {
+  color: #f9f403;
+  transition: 0.5s;
+}
+
+header span::after {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 600;
+  content: '\f1f8';
+  color: #fff;
+  font-size: 25px;
+}
+
+header .wrapper form {
+  margin: 0 auto;
+}
+
+header form input {
+  outline: none;
+  border: none;
+  border-bottom: 6px solid #f9f403;
+  height: 50px;
+  font-size: 20px;
+  padding: 0 20px;
+}
+
+header form button {
+  padding: 15px 15px;
+  font-size: 18px;
+  margin-left: 10px;
+  color: #4f4f4f;
+  background-color: #fff;
+  outline: none;
+  border: none;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+header form button:hover {
+  background-color: #f9f403;
+  transition: 0.5s;
+}
+
+.input_error_msg{
+  text-align: center;
+  color: #f9f403;
+  text-shadow:1px 1px 2px red;
+  font-weight: 600;
+}
+
+.err_msg_list{
+  color: #f9f403;
+  font-weight: 600;
+  text-shadow: 1px 1px 2px red;
+}
+
+/* Header section ends here. */
+/* Main section starts here. */
+
+/* Title section starts here. */
+
+.title h2 {
+  text-align: center;
+  text-transform: capitalize;
+  color: #fff;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 35px;
+  position: relative;
+  margin-bottom: 90px;
+}
+
+.title h2::before {
+  content: '';
+  border-top: 1px solid #cccccc82;
+  width: 36.5%;
+  position: absolute;
+  top: 50%;
+  left: 0;
+}
+
+.title h2::after {
+  content: '';
+  border-top: 1px solid #cccccc82;
+  width: 36.5%;
+  position: absolute;
+  top: 50%;
+  right: 0;
+}
+
+/* Title section ends here. */
+/* Item lists section starts here. */
+
+.item_list{
+  padding-bottom: 30px;
+}
+
+.item_list .wrapper {
+  display: grid;
+  color: #4f4f4f;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 40px;
+  grid-row-gap: 60px;
+}
+
+.each_item {
+  background-color: #fff;
+  box-shadow: 3px 3px 1px #e7ebee, 6px 6px 1px #99adb4;
+  position: relative;
+}
+
+.quantity {
+  color: #4f4f4f;
+  background-color: #f9f403;
+  position: absolute;
+  top: -20px;
+  left: 25px;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 4px 20px 5px 9px;
+  cursor: alias;
+}
+
+.quantity::after{
+  content: " QUANTITY";
+  color: #4f4f4f;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.each_item {
+  padding: 20px 17px;
+}
+
+.each_item .item_details h3 {
+  color: #4f4f4f;
+  font-size: 24px;
+  font-weight: 600;
+  text-transform: capitalize;
+  cursor: alias;
+}
+
+.each_item .item_details span {
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
+  color: #626262;
+  display: inline-block;
+  margin: 15px 0;
+  cursor: alias;
+}
+
+.each_item ul {
+  display: flex;
+}
+
+.each_item ul li {
+  padding: 7px 15px;
+  border: 1px solid #4f4f4f;
+  text-transform: capitalize;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.each_item ul li:first-child {
+  box-shadow: inset 1px 1px 10px #f9f403;
+}
+
+.each_item ul li:nth-child(2) {
+  box-shadow: inset 1px 1px 10px rgb(230, 81, 81);
+  margin-left: 20px;
+}
+
+.each_item ul li:first-child:hover {
+  background-color: #f9f403;
+  transition: 0.5s;
+}
+
+.each_item ul li:nth-child(2):hover {
+  background-color: rgb(230, 81, 81);
+  transition: 0.5s;
+}
+
+.each_item .item_details ul .update{
+  box-shadow: inset 1px 1px 10px rgb(107, 246, 51);
+}
+
+.update_element{
+  border-bottom: 1px solid rgb(107, 246, 51);
+}
+
+.update_element::after{
+  content: attr(data-after-content) " <- Click to edit.";
+  color: #4f4f4f;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+/* Item lists section starts here. */
+/* Main section ends here. */
+
+/* Responsive stylesheet starts here. */
+
+@media only screen and (max-width: 1260px) {
+  .wrapper {
+    width: auto;
+    padding: 0 40px;
+  }
+
+  header .wrapper {
+    padding: 60px 40px;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .item_list .wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  header form input {
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  header .wrapper form button {
+    margin: 0;
+  }
+}
+
+@media only screen and (max-width: 560px) {
+  .item_list .wrapper {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  header .wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  header span {
+    margin-bottom: 20px;
+  }
+
+  header .wrapper form {
+    margin: 0;
+  }
+
+  .title h2::before,
+  .title h2::after {
+    width: 5%;
+  }
+
+  header form input {
+    width: 200px;
+  }
+}
+
+/* Responsive stylesheet ends here. */
+
+/* Stylesheet ends here. */
